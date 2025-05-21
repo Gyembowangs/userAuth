@@ -20,7 +20,7 @@ exports.postLogin = async (req, res) => {
       return res.render('pages/login', { message: 'Invalid credentials!' });
     }
 
-
+    
     // Check if email is verified
     if (!user.is_verified) {
       return res.render('pages/login', { message: 'Please verify your email first.' });

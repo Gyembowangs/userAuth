@@ -1,7 +1,6 @@
 const pgp = require('pg-promise')();
 require('dotenv').config();
 
-const isProduction = process.env.NODE_ENV === 'production';
 
 const db = pgp({
   host: process.env.DB_HOST,
@@ -9,7 +8,10 @@ const db = pgp({
   database: process.env.DB_NAME,
   user: process.env.DB_USER,
   password: process.env.DB_PASS,
-  ssl: isProduction ? { rejectUnauthorized: false } : false
+  ssl: {
+   rejectUnauthorized: false // For self-signed certificates, set to true for production with valid certs
+  }
 });
+
 
 module.exports = db;
